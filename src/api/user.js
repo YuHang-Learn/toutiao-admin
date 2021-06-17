@@ -1,4 +1,4 @@
-import { request } from '../utils/request'
+import { request } from 'utils/request'
 
 export function userLogin (data) {
   const user = {
@@ -9,5 +9,12 @@ export function userLogin (data) {
     method: 'post',
     url: '/mp/v1_0/authorizations',
     data: user
+  })
+}
+
+export function getUserInfo () {
+  return request({
+    method: 'get',
+    url: '/mp/v1_0/user/profile'
   })
 }

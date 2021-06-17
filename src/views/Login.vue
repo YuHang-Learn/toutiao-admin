@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { userLogin } from '../api/user'
+import { userLogin } from 'api/user'
 export default {
   name: 'Login',
   data () {
@@ -46,7 +46,7 @@ export default {
         name: [
           { required: true, message: '请输入账号/手机号', trigger: 'blur' },
           { min: 11, max: 11, message: '账号/手机号格式错误', trigger: 'blur' },
-          { pattern: /^1(3|4|5|6|7|8|9)\d{9}$/, message: '账号/手机号应为数字', trigger: 'change' }
+          { pattern: /^1(3|4|5|6|7|8|9)\d{9}$/, message: '账号/手机号应为数字', trigger: 'blur' }
         ],
         password: [
           { required: true, message: '请输入账号/手机号', trigger: 'blur' },
@@ -82,7 +82,9 @@ export default {
           message: '登录成功',
           type: 'success'
         })
+        window.localStorage.setItem('user', JSON.stringify(res.data.data))
         this.btnStatus = false
+        this.$router.push({ name: 'home' })
       }).catch(err => {
         this.$message.error('账号或密码不正确')
         console.log(err)
