@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Login from 'views/Login'
-import Layout from 'layout'
-import Home from 'views/home'
+import Login from 'views/Login/'
+import Layout from 'layout/'
 
 Vue.use(VueRouter)
 
@@ -21,7 +20,37 @@ const routes = [
       {
         path: '',
         name: 'home',
-        component: Home
+        component: () => import('views/home/')
+      },
+      {
+        path: '/article',
+        name: 'article',
+        component: () => import('views/article/')
+      },
+      {
+        path: '/image',
+        name: 'image',
+        component: () => import('views/image/')
+      },
+      {
+        path: '/publish',
+        name: 'publish',
+        component: () => import('views/publish/')
+      },
+      {
+        path: '/comment',
+        name: 'comment',
+        component: () => import('views/comment/')
+      },
+      {
+        path: '/fans',
+        name: 'fans',
+        component: () => import('views/fans/')
+      },
+      {
+        path: '/settings',
+        name: 'settings',
+        component: () => import('views/settings/')
       }
     ]
   }

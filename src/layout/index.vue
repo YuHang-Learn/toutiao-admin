@@ -11,22 +11,20 @@
         <Header @isOnOrOff="isOnOrOff" :isCollapse="isCollapse"></Header>
       </el-header>
       <el-main>
-        <home></home>
+        <router-view />
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
-import Aside from 'layout/components/Aside.vue'
-import Header from 'layout/components/Header.vue'
-import Home from 'views/home'
+import Aside from 'layout/components/Aside.vue/'
+import Header from 'layout/components/Header.vue/'
 export default {
   name: 'Layout',
   components: {
     Aside,
-    Header,
-    Home
+    Header
   },
   data () {
     return {
@@ -35,7 +33,6 @@ export default {
   },
   methods: {
     isOnOrOff () {
-      console.log(this.isCollapse)
       this.isCollapse = !this.isCollapse
     }
   }
