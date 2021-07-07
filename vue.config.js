@@ -2,7 +2,17 @@ const path = require('path') //  引入path模块
 function resolve (dir) {
   return path.join(__dirname, dir) // path.join(__dirname)设置绝对路径
 }
-
+// devServer: {
+//   proxy: {
+//     '/apis': {
+//       target: 'http://localhost:8080/',
+//         changeOrigin: true,
+//         pathRewrite: {
+//         '^/apis': ''
+//       }
+//     }
+//   }
+// },
 module.exports = {
   chainWebpack: (config) => {
     config.resolve.alias

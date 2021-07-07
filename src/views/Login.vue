@@ -37,8 +37,8 @@ export default {
   data () {
     return {
       user: {
-        name: '',
-        password: '',
+        name: '13911111111',
+        password: '246810',
         agree: false
       },
       btnStatus: false,

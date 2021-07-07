@@ -4,6 +4,8 @@
       根据筛选结果共查询到{{ totalCount }}条结果:
     </div>
     <el-table
+      v-loading="loading"
+      element-loading-text="拼命加载中"
       :data="tableData"
       stripe
       class="article-table"
@@ -51,9 +53,24 @@
         label="日期"
       >
       </el-table-column>
-      <el-table-column label="操作" v-if="tableData.length">
-        <el-button type="primary" icon="el-icon-edit" circle></el-button>
-        <el-button type="danger" icon="el-icon-delete" circle></el-button>
+      <el-table-column
+        label="操作"
+        v-if="tableData.length"
+      >
+        <template slot-scope="scope">
+          <el-button
+            type="primary"
+            icon="el-icon-edit"
+            circle
+            @click="updateArticle(scope.row.id)"
+          ></el-button>
+          <el-button
+            type="danger"
+            icon="el-icon-delete"
+            circle
+            @click="delArticle(scope.row.id)"
+          ></el-button>
+        </template>
       </el-table-column>
     </el-table>
     <div class="page">
@@ -62,14 +79,16 @@
         layout="prev, pager, next, jumper"
         @current-change="vertically"
         class="page"
-        :total="totalCount / 10">
+        :disabled="loading"
+        :total="totalCount"
+      >
       </el-pagination>
     </div>
   </el-card>
 </template>
 
 <script>
-import { getArticleData } from 'api/article'
+import { getArticleData, deleteArticle } from 'api/article'
 
 export default {
   name: 'Table',
@@ -103,7 +122,8 @@ export default {
         end_pubdate: null,
         page: 1,
         per_page: 10
-      }
+      },
+      loading: true
     }
   },
   watch: {
@@ -127,16 +147,39 @@ export default {
   },
   methods: {
     loadArticle () {
+      this.loading = true
       getArticleData(this.params).then((res) => {
         this.tableData = res.data.data.results
         this.totalCount = res.data.data.total_count
-        // console.log(res)
-        // console.log(this.tableData)
+        this.loading = false
       })
     },
     vertically (page) {
       this.params.page = page
       this.loadArticle()
+    },
+    delArticle (articleId) {
+      this.$confirm('确定删除文章吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        deleteArticle(articleId).then(res => {
+          this.$message({
+            message: '删除成功！',
+            type: 'success'
+          })
+          this.loadArticle()
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
+    },
+    updateArticle (articleId) {
+      this.$router.push(`/publish?id=${articleId}`)
     }
   }
 }

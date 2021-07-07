@@ -2,7 +2,7 @@
   <el-card>
     <el-breadcrumb separator-class="el-icon-arrow-right" class="bread">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item :to="{ path: '/article' }">内容管理</el-breadcrumb-item>
+      <el-breadcrumb-item>内容管理</el-breadcrumb-item>
     </el-breadcrumb>
     <el-form ref="form" :model="form">
       <el-form-item label="状态：">
@@ -45,7 +45,6 @@
 
 <script>
 import { getArticleChannel } from 'api/article'
-
 export default {
   name: 'Form',
   created () {
