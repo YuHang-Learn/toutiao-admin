@@ -14,8 +14,12 @@
       <el-form-item label="标题" prop="title">
         <el-input v-model="publishForm.title" style="width:300px;"></el-input>
       </el-form-item>
-      <el-form-item label="内容" prop="content">
-        <el-input v-model="publishForm.content"></el-input>
+      <el-form-item label="内容" prop="content" class="content">
+        <editor
+          @updateContent="updateContent"
+          v-model="publishForm.content"
+          class="editor-box"
+        ></editor>
       </el-form-item>
       <el-form-item label="封面" prop="cover">
         <el-radio-group v-model="publishForm.cover.type">
@@ -48,8 +52,12 @@
 
 <script>
 import { getArticleChannel, createArticle, updateArticle, getArticle } from 'api/article'
+import Editor from 'components/Editor/Editor.vue'
 export default {
   name: 'Publish',
+  components: {
+    Editor
+  },
   created () {
     this.loadChannels()
     if (this.$route.query.id) {
@@ -115,6 +123,7 @@ export default {
         })
       } else {
         createArticle(this.publishForm, draft).then(res => {
+          console.log(draft + 'sss')
           console.log(res)
           this.$message({
             message: `${draft ? '存入草稿' : '发布'}成功`,
@@ -123,6 +132,9 @@ export default {
           this.$router.push('/article')
         })
       }
+    },
+    updateContent (data) {
+      this.publishForm.content = data
     }
   }
 }
@@ -134,4 +146,24 @@ export default {
   margin-bottom: 10px;
   border-bottom: solid 1px #eee;
 }
+.content {
+  height: 500px;
+  .editor-box {
+    height: 450px;
+  }
+}
+// ql-editor 与 element-ui css 冲突解决样式
+//.ql-editor-class {
+//  -webkit-box-sizing: border-box;
+//  box-sizing: border-box;
+//  line-height: 1.42;
+//  height: 100%;
+//  outline: none;
+//  padding: 0 !important;
+//  tab-size: 4;
+//  -moz-tab-size: 4;
+//  text-align: left;
+//  word-wrap: break-word;
+//}
+
 </style>
