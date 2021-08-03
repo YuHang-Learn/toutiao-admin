@@ -24,7 +24,11 @@
       <el-table-column
         label="用户头像">
         <template slot-scope="scope">
-          <img :src="scope.row.photo" alt="">
+          <img v-if="scope.row.photo" :src="scope.row.photo" class="image" alt="">
+          <div class="block" v-else>
+            <span class="demonstration">默认</span>
+            <el-image></el-image>
+          </div>
         </template>
       </el-table-column>
     </el-table>
@@ -60,10 +64,8 @@ export default {
   methods: {
     getFans (page) {
       getFansData().then(res => {
-        console.log(typeof res)
         this.tableData = res.data.data.results
         this.total_count = res.data.data.total_count
-        console.log(res)
       })
     },
     handleCurrentChange (page) {
@@ -85,6 +87,9 @@ export default {
     padding-bottom: 15px;
     margin-bottom: 10px;
     border-bottom: 1px solid #eee;
+  }
+  .image {
+    width: 100px;
   }
 }
 </style>

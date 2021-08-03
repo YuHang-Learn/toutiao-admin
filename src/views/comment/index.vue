@@ -90,8 +90,6 @@ export default {
       }).then(res => {
         this.tableData = res.data.data.results
         this.total_count = res.data.data.total_count
-        console.log(res)
-        console.log(this.tableData)
       })
     },
     handleCurrentChange (page) {

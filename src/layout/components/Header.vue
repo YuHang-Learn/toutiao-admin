@@ -47,7 +47,6 @@ export default {
       this.user = res.data.data
     })
     globalBus.$on('info_update', (data) => {
-      console.log(data)
       this.user.name = data.name
       this.user.photo = data.photo
     })

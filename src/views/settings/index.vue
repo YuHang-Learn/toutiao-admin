@@ -126,7 +126,6 @@ export default {
             intro: this.changeForm.intro,
             email: this.changeForm.email
           }).then(res => {
-            console.log(res)
             this.$message({
               message: '保存成功',
               type: 'success'
@@ -181,6 +180,7 @@ export default {
         changePhoto(fd).then(res => {
           this.dialogVisible = false
           this.changeForm.photo = res.data.data.photo
+          this.previewImage = res.data.data.photo
           this.$message({
             message: '修改头像成功！',
             type: 'success'

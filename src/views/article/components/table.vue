@@ -149,7 +149,6 @@ export default {
     loadArticle () {
       this.loading = true
       getArticleData(this.params).then((res) => {
-        console.log(res)
         this.tableData = res.data.data.results
         this.totalCount = res.data.data.total_count
         this.loading = false

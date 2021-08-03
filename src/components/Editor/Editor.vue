@@ -43,7 +43,6 @@ export default {
             },
             // quill-image-extend-module源码中只判断服务器返回状态码为200才算成功，而本项目返回的状态码为201
             response: res => {
-              console.log(res)
               return res.data.url
             }
           },
@@ -76,7 +75,20 @@ export default {
   },
   watch: {
     content (val, oldVal) {
-      this.$emit('updateContent', this.content)
+      this.$emit('updateContent', val)
+    },
+    value (val, oldVal) {
+      this.content = val
+    }
+  },
+  // model: {
+  //   prop: 'content',
+  //   event: 'change'
+  // },
+  props: {
+    value: {
+      type: String,
+      default: ''
     }
   }
 }

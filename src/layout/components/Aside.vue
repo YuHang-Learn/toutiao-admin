@@ -30,10 +30,6 @@
           <i class="el-icon-s-comment"></i>
           <span slot="title">评论管理</span>
         </el-menu-item>
-<!--&lt;!&ndash;        <el-menu-item index="/fans">&ndash;&gt;-->
-<!--            <i class="el-icon-present"></i>-->
-<!--            <span slot="title">粉丝管理</span>-->
-<!--&lt;!&ndash;        </el-menu-item>&ndash;&gt;-->
         <el-submenu index="/fans">
           <template slot="title">
             <i class="el-icon-present"></i>
