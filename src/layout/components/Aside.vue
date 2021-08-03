@@ -30,10 +30,20 @@
           <i class="el-icon-s-comment"></i>
           <span slot="title">评论管理</span>
         </el-menu-item>
-        <el-menu-item index="/fans">
-          <i class="el-icon-present"></i>
-          <span slot="title">粉丝管理</span>
-        </el-menu-item>
+<!--&lt;!&ndash;        <el-menu-item index="/fans">&ndash;&gt;-->
+<!--            <i class="el-icon-present"></i>-->
+<!--            <span slot="title">粉丝管理</span>-->
+<!--&lt;!&ndash;        </el-menu-item>&ndash;&gt;-->
+        <el-submenu index="/fans">
+          <template slot="title">
+            <i class="el-icon-present"></i>
+            <span slot="title">粉丝管理</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item index="/fans/list">粉丝列表</el-menu-item>
+            <el-menu-item index="/fans/show">粉丝数据统计</el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
         <el-menu-item index="/settings">
           <i class="el-icon-setting"></i>
           <span slot="title">个人设置</span>

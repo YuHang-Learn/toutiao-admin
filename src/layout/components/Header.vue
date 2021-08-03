@@ -27,6 +27,7 @@
 
 <script>
 import { getUserInfo } from 'api/user'
+import globalBus from 'utils/global_bus'
 
 export default {
   name: 'Header',
@@ -44,6 +45,11 @@ export default {
   created () {
     getUserInfo().then(res => {
       this.user = res.data.data
+    })
+    globalBus.$on('info_update', (data) => {
+      console.log(data)
+      this.user.name = data.name
+      this.user.photo = data.photo
     })
   },
   methods: {

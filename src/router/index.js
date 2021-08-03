@@ -45,7 +45,17 @@ const routes = [
       {
         path: '/fans',
         name: 'fans',
-        component: () => import('views/fans/')
+        component: () => import('views/fans/index'),
+        children: [
+          {
+            path: 'list',
+            component: () => import('views/fans/list')
+          },
+          {
+            path: 'show',
+            component: () => import('views/fans/show')
+          }
+        ]
       },
       {
         path: '/settings',
