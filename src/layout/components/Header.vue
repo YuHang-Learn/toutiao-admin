@@ -17,7 +17,7 @@
     <i class="el-icon-arrow-down el-icon--right"></i>
   </span>
       <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item>个人中心</el-dropdown-item>
+        <el-dropdown-item @click.native="personal">个人中心</el-dropdown-item>
         <el-dropdown-item @click.native="onLogout">退出登录</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
@@ -58,6 +58,16 @@ export default {
     },
     isOnOrOff () {
       this.$emit('isOnOrOff')
+    },
+    personal () {
+      if (this.$route.path !== '/settings') {
+        this.$router.push('/settings')
+      } else {
+        this.$message({
+          message: '您已在个人中心',
+          type: 'warning'
+        })
+      }
     }
   }
 }

@@ -1,2 +1,0 @@
-// require('./article')
-// require('./user')

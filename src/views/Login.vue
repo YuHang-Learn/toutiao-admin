@@ -87,7 +87,6 @@ export default {
         this.$router.push({ name: 'home' })
       }).catch(err => {
         this.$message.error('账号或密码不正确')
-        console.log(err)
         this.btnStatus = false
       })
     }
